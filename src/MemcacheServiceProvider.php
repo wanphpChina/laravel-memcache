@@ -4,6 +4,7 @@ use Illuminate\Cache\Repository;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 
 class MemcacheServiceProvider extends ServiceProvider {
 
@@ -12,7 +13,7 @@ class MemcacheServiceProvider extends ServiceProvider {
      *
      * @var bool
      */
-    protected $defer = true;
+    protected $defer = false;
 
     /**
      * Register the service provider.
@@ -61,37 +62,41 @@ class MemcacheServiceProvider extends ServiceProvider {
             $config->set('cache.stores.memcache.servers', $servers);
 
             // extend the cache manager
-            $this->extendCache($this->app['cache']);
+            $this->extendCache($this->app);
         }
 
         // if the session driver is set to memcached
         if ($config['session.driver'] == 'memcache') {
             // extend the session manager
-            $this->extendSession($this->app['session']);
+            $this->extendSession($this->app);
         }
     }
 
     /**
      * Add the memcache driver to the cache manager.
      *
-     * @param \Illuminate\Cache\CacheManager  $cache
+     * @param \Illuminate\Contracts\Foundation\Application  $app
      */
-    public function extendCache(CacheManager $cache)
+    public function extendCache(Application $app)
     {
-        $cache->extend('memcache', function($app) {
-            return $app['memcache.store'];
+        $app->resolving('cache', function(CacheManager $cache) {
+            $cache->extend('memcache', function ($app) {
+                return $app['memcache.store'];
+            });
         });
     }
 
     /**
      * Add the memcache driver to the session manager.
      *
-     * @param \Illuminate\Session\SessionManager  $session
+     * @param \Illuminate\Contracts\Foundation\Application  $app
      */
-    public function extendSession(SessionManager $session)
+    public function extendSession(Application $app)
     {
-        $session->extend('memcache', function ($app) {
-            return $app['memcache.driver'];
+        $app->resolving('session', function(SessionManager $session) {
+            $session->extend('memcache', function ($app) {
+                return $app['memcache.driver'];
+            });
         });
     }
 
