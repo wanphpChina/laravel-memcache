@@ -38,4 +38,4 @@ You may now update your config/session.php config file to use memcache
 
 **Notice: This memcache driver uses the same config as Memcached**
 
-This addon was build because of the Webtatic repo lacking Memcache Support :/
+This package was originally a fork of https://github.com/igormatkovic/Laravel-4-Memcache. It has been modified to work with Laravel 5 which meant that more than just the service provider needed changing.
