@@ -1,6 +1,16 @@
 {
     "name": "swiggles/memcache",
     "description": "Memcache driver for Laravel 5",
+    "keywords":     ["Laravel", "Laravel 5", "Cache", "Caching", "Memcache"],
+    "homepage":     "https://github.com/swiggles/laravel-memcache",
+    "type":         "library",
+    "license":      "MIT",
+    "authors":      [
+        {
+            "name":      "Sam Wiggins",
+            "homepage":  "https://github.com/swiggles"
+        }
+    ],
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "~5.0"
