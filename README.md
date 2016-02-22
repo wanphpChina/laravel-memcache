@@ -1,13 +1,11 @@
 
 [![Build Status](https://travis-ci.org/swiggles/laravel-memcache.svg?branch=master)](https://travis-ci.org/swiggles/laravel-memcache)
 
-## Laravel 5 Memcache Driver
+## Laravel 5.2 Memcache Driver
 
-Update: added Laravel 5.2 support, not BC
+If you're developing on Windows and you're having trouble setting up Memcached with Laravel.
 
-If you're on a windows PC and you're having trouble setting up memcached with laravel then this is what you need.
-
-Handy for when you want to use a taggable cache store and test it out on your localhost.
+Developed for using a taggable cache store and testing it locally on a Windows OS.
 
 ========
 
@@ -47,4 +45,9 @@ You may now update your config/session.php config file to use memcache
 
 **Notice: This memcache driver uses the same config as Memcached**
 
-This package was originally a fork of https://github.com/igormatkovic/Laravel-4-Memcache. It has been modified to work with Laravel 5 which meant that more than just the service provider needed changing.
+This package originated from https://github.com/igormatkovic/Laravel-4-Memcache. 
+It has been modified to work with Laravel 5.2.
+
+# Changes
+* [2.0] Laravel 5.2 support added, (not bc)
+* [2.0.1] Removed support for PHP 5.4
