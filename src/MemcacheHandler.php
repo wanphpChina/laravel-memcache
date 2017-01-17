@@ -1,4 +1,4 @@
-<?php namespace Swiggles\Memcache;
+<?php namespace Wawa\Memcache;
 
 use SessionHandlerInterface;
 use Illuminate\Contracts\Cache\Repository as CacheContract;
