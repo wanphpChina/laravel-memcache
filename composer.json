@@ -1,5 +1,5 @@
 {
-    "name": "swiggles/memcache",
+    "name": "wawa/memcache",
     "description": "Memcache driver for Laravel 5",
     "keywords":     ["Laravel", "Laravel 5", "Cache", "Caching", "Memcache"],
     "homepage":     "https://github.com/swiggles/laravel-memcache",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Swiggles\\Memcache\\": "src/"
+            "Wawa\\Memcache\\": "src/"
         }
     },
     "minimum-stability": "dev"
