@@ -14,7 +14,6 @@ class MemcacheServiceProvider extends ServiceProvider {
      * @var bool
      */
     protected $defer = false;
-
     /**
      * Register the service provider.
      *
@@ -25,25 +24,21 @@ class MemcacheServiceProvider extends ServiceProvider {
         $this->app->singleton('memcache', function($app)
         {
             $memcache = new MemcacheConnector;
-
-            $servers = $this->app['config']['cache.stores.memcached.servers'];
+            $connection = $this->app['config']['cache.default'];
+            $servers = $this->app['config']['cache.stores.'.$connection.'.servers'];
             return $memcache->connect($servers);
         });
-
         $this->app->singleton('memcache.store', function($app)
         {
             $prefix = $this->app['config']['cache.prefix'];
-
             return new Repository(new MemcacheStore($app['memcache'], $prefix));
         });
-
         $this->app->singleton('memcache.driver', function($app)
         {
             $minutes = $this->app['config']['session.lifetime'];
             return new MemcacheHandler($app['memcache.store'], $minutes);
         });
     }
-
     /**
      * Boot the service provider.
      *
@@ -53,25 +48,18 @@ class MemcacheServiceProvider extends ServiceProvider {
     {
         /** @var \Illuminate\Contracts\Config\Repository $config */
         $config = $this->app['config'];
-
         // if the cache driver is set to use the memcache driver
-        if ($config['cache.default'] == 'memcache') {
-            // set the config to use same servers as memcached
-            $config->set('cache.stores.memcache.driver', 'memcache');
-            $servers = $config['cache.stores.memcached.servers'];
-            $config->set('cache.stores.memcache.servers', $servers);
-
+        $default_connection = $config['cache.default'];
+        if ($config['stores.'.$default_connection.'.driver'] == 'memcache') {
             // extend the cache manager
             $this->extendCache($this->app);
         }
-
         // if the session driver is set to memcached
         if ($config['session.driver'] == 'memcache') {
             // extend the session manager
             $this->extendSession($this->app);
         }
     }
-
     /**
      * Add the memcache driver to the cache manager.
      *
@@ -85,7 +73,6 @@ class MemcacheServiceProvider extends ServiceProvider {
             });
         });
     }
-
     /**
      * Add the memcache driver to the session manager.
      *
@@ -99,7 +86,6 @@ class MemcacheServiceProvider extends ServiceProvider {
             });
         });
     }
-
     /**
      * @return array
      */
