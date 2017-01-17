@@ -4,7 +4,7 @@
     "keywords":     ["Laravel", "Laravel 5", "Cache", "Caching", "Memcache"],
     "homepage":     "https://github.com/swiggles/laravel-memcache",
     "type":         "library",
-    "license":      "MIT",
+    "license":      "GPL",
     "authors":      [
         {
             "name":      "wawa",
