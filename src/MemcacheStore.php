@@ -1,4 +1,4 @@
-<?php namespace Swiggles\Memcache;
+<?php namespace Wawa\Memcache;
 
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Cache\TaggableStore;
